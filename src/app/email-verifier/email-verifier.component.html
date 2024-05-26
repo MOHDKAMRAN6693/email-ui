@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="mb-0">Email Verifier</h3>
+          <span class="hidden-file">
+            <input #uploadEmailList type="file" class="m-l-15" accept=".csv" (change)="uploadEmailListFunc($event)">
+          </span>
+          <button class="btn btn-outline-secondary btn-sm" data-click="panel-reload" (click)="uploadEmailList.click()">
+            <i class="bi bi-upload"></i> Upload a list of email addresses to verify
+          </button>
+          <!-- <a href="javascript:" class="btn btn-xs btn-icon btn-circle btn-success" style="height: 20px;width:20px;"
+            data-click="panel-reload" (click)="uploadEmailList.click()"><i class="fa fa-upload fa-fw fa-lg"></i>
+          </a>
+          <button class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-upload"></i> Upload a list of email addresses to verify
+          </button> -->
+        </div>
+        <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+          <div class="input-group">
+            <input id="email" formControlName="email" type="email" class="form-control"
+              placeholder="Enter an email address..."
+              [ngClass]="{'is-invalid': email?.invalid && (email?.dirty || email?.touched)}" />
+            <button class="btn btn-primary" type="submit" [disabled]="emailForm.invalid || checkingEmail">
+              <span *ngIf="checkingEmail" class="spinner-border spinner-border-sm"></span> Verify
+            </button>
+          </div>
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback d-block mt-2">
+            <!-- <div *ngIf="email?.errors?.required">Email is required.</div>
+            <div *ngIf="email?.errors?.email">Invalid email address.</div> -->
+          </div>
+        </form>
+        <div *ngIf="emailExists !== null" class="mt-3">
+          <div *ngIf="emailExists" class="alert alert-success">Email exists!</div>
+          <div *ngIf="!emailExists" class="alert alert-danger">Email does not exist.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let email of validEmailsList">
+              <td>{{email.email}}</td>
+              <td>{{email.valid}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

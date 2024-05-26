@@ -1,0 +1,33 @@
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.btn-outline-secondary {
+  font-size: 14px;
+}
+
+.input-group {
+  display: flex;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+.spinner-border {
+  margin-right: 8px;
+}
+.hidden-file {
+  visibility: hidden;
+  position: absolute;
+  overflow: hidden;
+  width: 0px;
+  height: 0px;
+  border: none;
+  margin: 0;
+  padding: 0
+}
